@@ -16,9 +16,9 @@ class CustomAppbar extends StatelessWidget {
           height: 40,
           width: 40,
           decoration: BoxDecoration(
-              color: Color(0xff3B3B3B),
+              color:const Color(0xff3B3B3B),
               borderRadius: BorderRadius.circular(10)),
-          child: Center(
+          child:const Center(
               child: Icon(
             Icons.search,
             size: 28,
