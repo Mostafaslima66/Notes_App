@@ -2,23 +2,27 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
-      {super.key, required this.ButtonName, required this.Buttoncolor});
-  final String ButtonName;
-  final Color Buttoncolor;
+      {super.key,
+      required this.buttonname,
+      required this.buttoncolor,
+      this.ontap});
+  final String buttonname;
+  final Color buttoncolor;
+  final void Function()? ontap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: ontap,
       child: Container(
         height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Buttoncolor,
+          color: buttoncolor,
         ),
         child: Center(
             child: Text(
-          ButtonName,
+          buttonname,
           style: const TextStyle(
             color: Colors.black,
             fontSize: 18,
