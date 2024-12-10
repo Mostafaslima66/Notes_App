@@ -23,7 +23,7 @@ class NotesView extends StatelessWidget {
             },
           );
         },
-        backgroundColor: Kprimarycolor,
+        backgroundColor: kprimarycolor,
         shape: const CircleBorder(),
         child: const Center(
           child: Icon(
@@ -37,6 +37,3 @@ class NotesView extends StatelessWidget {
     );
   }
 }
-
-
-

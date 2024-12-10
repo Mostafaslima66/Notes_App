@@ -33,7 +33,7 @@ class AddnoteBottomsheet extends StatelessWidget {
             ),
             CustomButton(
               ButtonName: "Add",
-              Buttoncolor: Kprimarycolor,
+              Buttoncolor: kprimarycolor,
             ),
             SizedBox(
               height: 25,
