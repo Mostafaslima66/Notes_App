@@ -9,7 +9,7 @@ void main() async {
   Hive.registerAdapter(NoteModelAdapter());
 
   await Hive.initFlutter();
- var box = await Hive.openBox(knotebox);
+  await Hive.openBox(knotebox);
   runApp(NotesApp());
 }
 
