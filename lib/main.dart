@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:hive_flutter/adapters.dart';
 import 'package:noteapp/Views/Edit_note_view.dart';
 import 'package:noteapp/Views/Notes_view.dart';
 import 'package:noteapp/constants.dart';
+import 'package:noteapp/cubits/Add_note_cubit/add_note_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
 
 void main() async {
+  // Initialize Hive and register adapters
   Hive.registerAdapter(NoteModelAdapter());
-
   await Hive.initFlutter();
-  await Hive.openBox(knotebox);
-  runApp(NotesApp());
+  await Hive.openBox<NoteModel>(knotebox);
+
+  runApp(const NotesApp());
 }
 
 class NotesApp extends StatelessWidget {
@@ -18,18 +21,27 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: ThemeData.dark().textTheme.apply(
-              fontFamily: 'Poppins',
-            ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AddNoteCubit(),
+        ),
+
+        // Add more BlocProviders as needed
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          textTheme: ThemeData.dark().textTheme.apply(
+                fontFamily: 'Poppins',
+              ),
+        ),
+        initialRoute: NotesView.id,
+        routes: {
+          NotesView.id: (context) => const NotesView(),
+          EditNoteView.id: (context) => const EditNoteView(),
+        },
       ),
-      initialRoute: NotesView.id,
-      routes: {
-        NotesView.id: (context) => const NotesView(),
-        EditNoteView.id: (context) => const EditNoteView(),
-      },
     );
   }
 }
