@@ -9,14 +9,16 @@ import 'package:noteapp/cubits/Add_note_cubit/add_note_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
 
 void main() async {
-  Bloc.observer = CubitObserver();
-  // Initialize Hive and register adapters
- 
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox<NoteModel>(knotebox);
- Hive.registerAdapter(NoteModelAdapter());
-  runApp(const NotesApp());
+
+  Hive.registerAdapter(NoteModelAdapter()); // Register the adapter first
+  await Hive.openBox<NoteModel>(knotebox); // Then open the box
+
+  Bloc.observer = CubitObserver();
+  runApp(NotesApp());
 }
+
 
 class NotesApp extends StatelessWidget {
   const NotesApp({super.key});

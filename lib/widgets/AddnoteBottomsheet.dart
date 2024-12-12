@@ -15,8 +15,7 @@ class AddnoteBottomsheet extends StatelessWidget {
         right: 16,
         bottom: MediaQuery.of(context).viewInsets.bottom, // Adjust for keyboard
       ),
-      child: SingleChildScrollView(
-          child: BlocConsumer<AddNoteCubit, AddNoteState>(
+      child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
           if (state is AddNoteSuccess) {
             // Dismiss the bottom sheet on success
@@ -35,12 +34,16 @@ class AddnoteBottomsheet extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          final isLoading = state is AddNoteLoading;
+
           return ModalProgressHUD(
-            inAsyncCall: state is AddNoteLoading ? true : false,
-            child:const Addnoteform(),
+            inAsyncCall:isLoading ?true:false,
+            child:const SingleChildScrollView(
+              child: Addnoteform(),
+            ),
           );
         },
-      )),
+      ),
     );
   }
 }
