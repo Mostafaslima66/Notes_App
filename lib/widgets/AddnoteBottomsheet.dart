@@ -9,40 +9,42 @@ class AddnoteBottomsheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom, // Adjust for keyboard
-      ),
-      child: BlocConsumer<AddNoteCubit, AddNoteState>(
-        listener: (context, state) {
-          if (state is AddNoteSuccess) {
-            // Dismiss the bottom sheet on success
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Note added successfully!")),
-            );
-          } else if (state is AddNoteFailure) {
-            print("failed${state.errormessage}");
-            // Show error message on failure
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Failed to add note: ${state.errormessage}"),
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom:
+              MediaQuery.of(context).viewInsets.bottom, // Adjust for keyboard
+        ),
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+            if (state is AddNoteSuccess) {
+              // Dismiss the bottom sheet on success
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Note added successfully!")),
+              );
+            } else if (state is AddNoteFailure) {
+              print("failed${state.errormessage}");
+              // Show error message on failure
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Failed to add note: ${state.errormessage}"),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is AddNoteLoading ? true : false,
+              child: const SingleChildScrollView(
+                child: Addnoteform(),
               ),
             );
-          }
-        },
-        builder: (context, state) {
-          final isLoading = state is AddNoteLoading;
-
-          return ModalProgressHUD(
-            inAsyncCall:isLoading ?true:false,
-            child:const SingleChildScrollView(
-              child: Addnoteform(),
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
