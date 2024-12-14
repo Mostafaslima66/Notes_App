@@ -33,4 +33,4 @@ class AddNoteCubit extends Cubit<AddNoteState> {
 //creat function   (Done)
 //provide cubit    (Done)
 //integrate cubit  (Done)
-//trigger cubit
+//trigger cubit    (Done) 

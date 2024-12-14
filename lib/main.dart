@@ -5,7 +5,6 @@ import 'package:noteapp/Views/Edit_note_view.dart';
 import 'package:noteapp/Views/Notes_view.dart';
 import 'package:noteapp/constants.dart';
 import 'package:noteapp/cubit_observer/cubit_observer.dart';
-import 'package:noteapp/cubits/Add_note_cubit/add_note_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
 
 void main() async {
