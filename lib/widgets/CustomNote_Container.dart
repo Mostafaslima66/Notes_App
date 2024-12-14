@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:noteapp/Views/Edit_note_view.dart';
+import 'package:noteapp/models/Note_model.dart';
 
 class CustomNoteContainer extends StatelessWidget {
-  const CustomNoteContainer({super.key});
+  const CustomNoteContainer({super.key, required this.noteModel});
+  final NoteModel noteModel;
 
   @override
   Widget build(BuildContext context) {
+    // Parse the date string into a DateTime object
+    DateTime parsedDate = DateTime.parse(noteModel.date);
+
+    // Format the date using intl
+    String formattedDate = DateFormat('MMMM dd, yyyy').format(parsedDate);
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, EditNoteView.id);
@@ -13,16 +22,16 @@ class CustomNoteContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
         decoration: BoxDecoration(
-          color: Color(0xffFFCD7A),
+          color: Color(noteModel.notecolor),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
-              title: const Text(
-                "Flutter tips",
-                style: TextStyle(
+              title: Text(
+                noteModel.title,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 26,
                 ),
@@ -30,7 +39,7 @@ class CustomNoteContainer extends StatelessWidget {
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Text(
-                  "Build yor career with \n Mostafa Slima ",
+                  noteModel.content,
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.6),
                     fontSize: 18,
@@ -38,7 +47,9 @@ class CustomNoteContainer extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Add delete functionality if needed
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.black,
@@ -49,13 +60,13 @@ class CustomNoteContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 24, top: 15),
               child: Text(
-                "December 2024",
+                formattedDate, // Use the formatted date here
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                   fontSize: 16,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
