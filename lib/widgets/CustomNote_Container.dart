@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:noteapp/Views/Edit_note_view.dart';
 import 'package:noteapp/models/Note_model.dart';
 
@@ -9,12 +8,6 @@ class CustomNoteContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Parse the date string into a DateTime object
-    DateTime parsedDate = DateTime.parse(noteModel.date);
-
-    // Format the date using intl
-    String formattedDate = DateFormat('MMMM dd, yyyy').format(parsedDate);
-
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, EditNoteView.id);
@@ -60,7 +53,7 @@ class CustomNoteContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 24, top: 15),
               child: Text(
-                formattedDate, // Use the formatted date here
+                noteModel.date, // Use the formatted date here
                 style: TextStyle(
                   color: Colors.black.withOpacity(0.6),
                   fontSize: 16,

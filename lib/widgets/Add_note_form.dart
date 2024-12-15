@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:noteapp/constants.dart';
 import 'package:noteapp/cubits/Add_note_cubit/add_note_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
@@ -51,14 +52,17 @@ class _AddnoteformState extends State<Addnoteform> {
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
-                isloading:state is AddNoteLoading ?true:false,
+                isloading: state is AddNoteLoading ? true : false,
                 ontap: () {
                   if (formkey.currentState!.validate()) {
                     formkey.currentState!.save();
+                    //formate the date
+                    String formatedate =
+                        DateFormat('MMMM dd, yyyy').format(DateTime.now());
                     var notemodel = NoteModel(
                         title: title!,
                         content: content!,
-                        date: DateTime.now().toString(),
+                        date: formatedate,
                         notecolor: Colors.blue.value);
                     BlocProvider.of<AddNoteCubit>(context).addnote(notemodel);
                   } else {
