@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noteapp/Views/Edit_note_view.dart';
+import 'package:noteapp/cubits/read%20notes%20cubit/read_notes_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
 
 class CustomNoteContainer extends StatelessWidget {
@@ -21,9 +23,10 @@ class CustomNoteContainer extends StatelessWidget {
           size: 30,
         ),
       ),
-      onDismissed: (direction)  {
+      onDismissed: (direction) {
         // Delete the note from Hive when dismissed
         noteModel.delete();
+        BlocProvider.of<ReadNotesCubit>(context).readallnotes();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Note deleted')),
         );

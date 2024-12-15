@@ -5,6 +5,7 @@ import 'package:noteapp/Views/Edit_note_view.dart';
 import 'package:noteapp/Views/Notes_view.dart';
 import 'package:noteapp/constants.dart';
 import 'package:noteapp/cubit_observer/cubit_observer.dart';
+import 'package:noteapp/cubits/read%20notes%20cubit/read_notes_cubit.dart';
 import 'package:noteapp/models/Note_model.dart';
 
 void main() async {
@@ -18,24 +19,26 @@ void main() async {
   runApp(NotesApp());
 }
 
-
 class NotesApp extends StatelessWidget {
   const NotesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: ThemeData.dark().textTheme.apply(
-              fontFamily: 'Poppins',
-            ),
+    return BlocProvider(
+  create: (context) => ReadNotesCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          textTheme: ThemeData.dark().textTheme.apply(
+                fontFamily: 'Poppins',
+              ),
+        ),
+        initialRoute: NotesView.id,
+        routes: {
+          NotesView.id: (context) => const NotesView(),
+          EditNoteView.id: (context) => const EditNoteView(),
+        },
       ),
-      initialRoute: NotesView.id,
-      routes: {
-        NotesView.id: (context) => const NotesView(),
-        EditNoteView.id: (context) => const EditNoteView(),
-      },
     );
   }
 }
