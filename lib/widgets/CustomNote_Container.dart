@@ -33,7 +33,7 @@ class CustomNoteContainer extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, EditNoteView.id);
+          Navigator.pushNamed(context, EditNoteView.id, arguments: noteModel,);
         },
         child: Container(
           padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),

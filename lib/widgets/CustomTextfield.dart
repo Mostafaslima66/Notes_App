@@ -6,17 +6,19 @@ class CustomTextfield extends StatelessWidget {
     super.key,
     required this.hint,
     this.maxlines,
-    this.onSaved,
+    this.onSaved, this.onChanged,
   });
 
   final String hint;
   final int? maxlines;
-  final void Function(String?)? onSaved; // Callback for saving the value
+  final void Function(String?)? onSaved; 
+ final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-       onSaved: onSaved, // Assign the onSaved callback
+      onChanged:onChanged,
+       onSaved: onSaved, 
         validator: (value) {
     if (value?.isEmpty ?? true) {
       return "Field is required";
