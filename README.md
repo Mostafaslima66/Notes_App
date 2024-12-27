@@ -21,3 +21,4 @@ A simple and efficient Note-taking application built with **Flutter** and **Dart
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/note-app.git
+   https://github.com/user-attachments/assets/ea4ee7e4-be49-4155-847d-faf21bf4fbd9
