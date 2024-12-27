@@ -17,6 +17,7 @@ A simple and efficient Note-taking application built with **Flutter** and **Dart
 - **Cubit**: A predictable state management library.
 
   ### Video
-  [Watch the demo video] (https://github.com/user-attachments/assets/ea4ee7e4-be49-4155-847d-faf21bf4fbd9)
+  [Watch the demo video]
+  https://github.com/user-attachments/assets/ea4ee7e4-be49-4155-847d-faf21bf4fbd9
 
    
